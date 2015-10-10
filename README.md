@@ -1,6 +1,6 @@
 # JsonApiParams
 
-Extracts JSON API params to old-fashioned way.
+Extracts JSON API (http://jsonapi.org/) params to old-fashioned way.
 
 ## Installation
 
@@ -19,6 +19,48 @@ Or install it yourself as:
     $ gem install json_api_params
 
 ## Usage
+
+In a case with the following request payload:
+
+``` json
+{
+  "data": {
+    "attributes": {
+      "x-y": 1,
+      "z": 2
+    },
+    "relationships": {
+      "foo-bar": {
+        "data": {
+          "id": 42
+        }
+      },
+      "baz": {
+        "data": null
+      },
+      "qux": {
+        "data": [
+          {
+            "id": 3
+          },
+          {
+            "id": 4
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+`ActionController::Parameters#extract_json_api` returns the following structure.
+
+``` ruby
+params.extract_json_api
+#=> {"x_y"=>1, "z"=>2, "foo_bar_id"=>42, "baz_id"=>nil, "qux_ids"=>[3, 4]}
+```
+
+You can use Strong Parameters as usual.
 
 ``` ruby
 # app/controllers/users_controller.rb
