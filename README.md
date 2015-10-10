@@ -1,13 +1,13 @@
-# JsonapiParams
+# JsonApiParams
 
-Deforms JSON API params to old-fashioned way.
+Extracts JSON API params to old-fashioned way.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'jsonapi_params'
+gem 'json_api_params'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install jsonapi_params
+    $ gem install json_api_params
 
 ## Usage
 
@@ -25,14 +25,14 @@ Or install it yourself as:
 
 class UsersController < ApplicationController
   def create
-    user_params = params.deform_jsonapi.permit(:name, :email)
+    user_params = params.extract_json_api.permit(:name, :email)
 
     @user = User.create!(user_params)
   end
 
   def update
     @user       = User.find(params[:id])
-    user_params = params.deform_jsonapi.permit(:name, :email)
+    user_params = params.extract_json_api.permit(:name, :email)
 
     @user.update! user_params
   end
@@ -47,7 +47,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/ursm/jsonapi_params.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ursm/json_api_params.
 
 
 ## License

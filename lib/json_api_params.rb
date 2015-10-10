@@ -8,7 +8,7 @@ require 'active_support/core_ext/object/try'
 require 'active_support/core_ext/string/inflections'
 
 class ActionController::Parameters
-  def deform_jsonapi
+  def extract_json_api
     data          = fetch(:data)
     relationships = data.fetch(:relationships) { self.class.new }
 

@@ -1,15 +1,15 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'jsonapi_params/version'
+require 'json_api_params/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'jsonapi_params'
-  spec.version       = JsonapiParams::VERSION
+  spec.name          = 'json_api_params'
+  spec.version       = JsonApiParams::VERSION
   spec.authors       = ['Keita Urashima']
   spec.email         = ['ursm@ursm.jp']
 
-  spec.summary       = 'Deforms JSON API params to the old-fashioned way'
-  spec.homepage      = 'https://github.com/ursm/jsonapi_params'
+  spec.summary       = 'Extracts JSON API params to the old-fashioned way'
+  spec.homepage      = 'https://github.com/ursm/json_api_params'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

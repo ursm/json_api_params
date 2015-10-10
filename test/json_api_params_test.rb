@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class JsonapiParamsTest < Minitest::Test
+class JsonApiParamsTest < Minitest::Test
   def test_simple
     params = ActionController::Parameters.new(
       data: {
@@ -36,6 +36,6 @@ class JsonapiParamsTest < Minitest::Test
       qux_ids:    [3, 4]
     )
 
-    assert { params.deform_jsonapi == expected }
+    assert { params.extract_json_api == expected }
   end
 end
