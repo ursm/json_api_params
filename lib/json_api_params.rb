@@ -9,7 +9,13 @@ require 'active_support/core_ext/string/inflections'
 
 class ActionController::Parameters
   def extract_json_api
-    data          = fetch(:data)
+    case data = fetch(:data)
+    when Array
+      return data.map {|_data|
+        self.class.new(data: _data).extract_json_api
+      }
+    end
+
     relationships = data.fetch(:relationships) { self.class.new }
 
     attributes = self.class[*data.fetch(:attributes) { Hash.new }.flat_map {|key, value|

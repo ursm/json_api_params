@@ -38,4 +38,35 @@ class JsonApiParamsTest < Minitest::Test
 
     assert { params.extract_json_api == expected }
   end
+
+  def test_batch
+    params = ActionController::Parameters.new(
+      data: [{
+        type: 'photos',
+        attributes: {
+          title: 'Ember Hamster',
+          src:   'http://example.com/images/productivity.png'
+        }
+      }, {
+        type: 'photos',
+        attributes: {
+          title: 'Mustaches on a Stick',
+          src:   'http://example.com/images/mustaches.png'
+        }
+      }]
+    )
+
+    expected = [
+      ActionController::Parameters.new(
+        title: 'Ember Hamster',
+        src:   'http://example.com/images/productivity.png'
+      ),
+      ActionController::Parameters.new(
+        title: 'Mustaches on a Stick',
+        src:   'http://example.com/images/mustaches.png'
+      )
+    ]
+
+    assert { params.extract_json_api == expected }
+  end
 end
