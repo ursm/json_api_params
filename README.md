@@ -1,6 +1,6 @@
 # JsonApiParams
 
-[![Build Status](https://travis-ci.org/ursm/json_api_params.svg)](https://travis-ci.org/ursm/json_api_params)
+[![Build Status](https://travis-ci.org/ursm/json_api_params.svg?branch=master)](https://travis-ci.org/ursm/json_api_params) [![Gem Version](https://badge.fury.io/rb/json_api_params.svg)](https://badge.fury.io/rb/json_api_params)
 
 Extracts JSON API (http://jsonapi.org/) params to old-fashioned way.
 
