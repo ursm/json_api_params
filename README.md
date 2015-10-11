@@ -1,5 +1,7 @@
 # JsonApiParams
 
+[![Build Status](https://travis-ci.org/ursm/json_api_params.svg)](https://travis-ci.org/ursm/json_api_params)
+
 Extracts JSON API (http://jsonapi.org/) params to old-fashioned way.
 
 ## Installation
