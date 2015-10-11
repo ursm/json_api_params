@@ -39,7 +39,8 @@ class JsonApiParamsTest < Minitest::Test
     assert { params.extract_json_api == expected }
   end
 
-  def test_batch
+  # http://jsonapi.org/extensions/bulk/
+  def test_bulk
     params = ActionController::Parameters.new(
       data: [{
         type: 'photos',
