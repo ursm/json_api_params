@@ -19,11 +19,11 @@ class ActionController::Parameters
 
     relationships = data.fetch(:relationships) { self.class.new }
 
-    attributes = self.class.new(Hash[*data.fetch(:attributes) { Hash.new }.flat_map {|key, value|
+    attributes = self.class.new(data.fetch(:attributes) { self.class.new }.to_unsafe_hash.map {|key, value|
       [key.underscore, value]
-    }])
+    }.to_h)
 
-    relationships.each_with_object(attributes) {|(key, value), attrs|
+    relationships.to_unsafe_hash.with_indifferent_access.each_with_object(attributes) {|(key, value), attrs|
       k = key.underscore
 
       case _data = value.fetch(:data)
