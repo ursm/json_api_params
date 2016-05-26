@@ -1,5 +1,6 @@
 # XXX Though these are necessary, AC::Parameters doesn't require it
 require 'active_support/core_ext/class/attribute_accessors'
+require 'active_support/core_ext/module/delegation'
 require 'date'
 require 'rack/test/uploaded_file'
 
