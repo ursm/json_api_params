@@ -18,9 +18,9 @@ class ActionController::Parameters
 
     relationships = data.fetch(:relationships) { self.class.new }
 
-    attributes = self.class[*data.fetch(:attributes) { Hash.new }.flat_map {|key, value|
+    attributes = self.class.new(Hash[*data.fetch(:attributes) { Hash.new }.flat_map {|key, value|
       [key.underscore, value]
-    }]
+    }])
 
     relationships.each_with_object(attributes) {|(key, value), attrs|
       k = key.underscore
