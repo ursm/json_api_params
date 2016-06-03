@@ -1,10 +1,10 @@
 # XXX Though these are necessary, AC::Parameters doesn't require it
 require 'active_support/core_ext/class/attribute_accessors'
+require 'active_support/core_ext/module/delegation'
 require 'date'
 require 'rack/test/uploaded_file'
 
 require 'action_controller/metal/strong_parameters'
-require 'active_support/core_ext/object/try'
 require 'active_support/core_ext/string/inflections'
 
 class ActionController::Parameters
@@ -16,23 +16,27 @@ class ActionController::Parameters
       }
     end
 
-    relationships = data.fetch(:relationships) { self.class.new }
-
-    attributes = self.class[*data.fetch(:attributes) { Hash.new }.flat_map {|key, value|
+    relationships = data.fetch(:relationships) { self.class.new }.to_unsafe_hash.map {|key, value|
       [key.underscore, value]
-    }]
+    }.to_h
 
-    relationships.each_with_object(attributes) {|(key, value), attrs|
-      k = key.underscore
+    attributes = data.fetch(:attributes) { self.class.new }.to_unsafe_hash.map {|key, value|
+      [key.underscore, value]
+    }.to_h
 
-      case _data = value.fetch(:data)
+    extracted = relationships.each_with_object(attributes) {|(key, value), attrs|
+      case _data = value.fetch('data')
       when Array
-        attrs["#{k}_ids"] = _data.map {|item|
-          item.fetch(:id)
+        attrs["#{key}_ids"] = _data.map {|item|
+          item.fetch('id')
         }
+      when nil
+        attrs["#{key}_id"] = nil
       else
-        attrs["#{k}_id"] = _data.try(:fetch, :id)
+        attrs["#{key}_id"] = _data.fetch('id')
       end
     }
+
+    self.class.new(extracted)
   end
 end
