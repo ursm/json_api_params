@@ -3,11 +3,17 @@ sudo: false
 cache:
   - bundler
 rvm:
-  - 2.2.5
-  - 2.3.1
+  - 2.2.6
+  - 2.3.3
+  - 2.4.0
 before_install: gem install bundler -v 1.10.6
 
 env:
   matrix:
     - RAILS_VERSION="~> 4.2"
     - RAILS_VERSION="~> 5.0.0"
+
+matrix:
+  exclude:
+    - rvm: 2.4.0
+      env: RAILS_VERSION="~> 4.2" # Rails 4.2 depends on json gem 1.8. However it couldn't be built with Ruby 2.4.
