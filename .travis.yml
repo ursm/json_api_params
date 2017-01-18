@@ -12,8 +12,3 @@ env:
   matrix:
     - RAILS_VERSION="~> 4.2"
     - RAILS_VERSION="~> 5.0.0"
-
-matrix:
-  exclude:
-    - rvm: 2.4.0
-      env: RAILS_VERSION="~> 4.2" # Rails 4.2 depends on json gem 1.8. However it couldn't be built with Ruby 2.4.
